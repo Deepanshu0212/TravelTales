@@ -3,6 +3,7 @@
     list-style: none;
     margin: 0px;
     padding:0px;
+    box-sizing: border-box;
 }
 
 nav{
@@ -14,6 +15,7 @@ nav{
     border-bottom: 1px gray solid;
     position: fixed;
     z-index: 100;
+    background-color: rgba(0,0,0,0.12);
 }
 
 .nav-content ul {
@@ -59,12 +61,170 @@ nav{
 #check{
     display: none;
 }
+
 .main{
     width: 100%;
     height: 100vh;
     background-image: url(./images/background_main.jpg);
     background-repeat: no-repeat;
 }
+
+/* General reset */
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    margin: 0;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('/api/placeholder/1920/1080');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-text {
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    margin-bottom: 100px; /* Adjust to center text with the path */
+}
+
+.airplane-path {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#airplane {
+    position: absolute;
+    font-size: 24px;
+    color: #3498db;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+    animation: moveAirplane 10s linear infinite;
+}
+
+#map-marker {
+    position: absolute;
+    font-size: 48px;
+    color: #e74c3c;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+    left: 1150px;  /* Final position at the end of the path */
+    top: 350px;
+    transform: translate(-50%, -50%);
+    opacity: 1; /* Always visible at the end of the path */
+    transform-origin: center;
+}
+
+@keyframes moveAirplane {
+    0% {
+        offset-distance: 0%;
+    }
+    100% {
+        offset-distance: 100%;
+    }
+}
+
+#airplane {
+    offset-path: path("M150,350 Q400,100 650,350 T1150,350");
+}
+.tag_title {
+    font-size: 1.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
+.line {
+    width: 110px;
+    height: 2px;
+    background-color: rgb(225, 121, 16);
+}
+
+.about_title {
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+}
+
+.about_btn {
+    height: 50px;
+    width: 150px;
+    background-color: rgb(225, 121, 16);
+    color: white;
+    border-radius: 4px;
+    margin-right: 50px;
+    font-size: medium;
+}
+
+.about_desc {
+    font-size: 0.93rem;
+    line-height: 1.2rem;
+    margin-bottom: 1.3rem;
+}
+.about_section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 100px 100px;
+    height: 100vh;
+    width: 100%;
+    perspective: 1000px;
+}
+
+@keyframes flipIn {
+    0% {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+.image_section, .content_section {
+    opacity: 0; /* Initially hidden */
+    transform: rotateY(180deg); /* Flipped initially */
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.about_img {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+.content_section {
+    position: absolute;
+    width: 46%;
+    right: 100px;
+    background-color: #9a9a9a7f;
+    padding: 30px;
+    box-shadow: 5px 5px 10px rgba(68, 27, 5, 0.12);
+    border: 1px solid rgba(143, 143, 143);
+}
+
+/* Flip effect on hover */
+.about_section:hover .image_section, 
+.about_section:hover .content_section {
+    opacity: 1; /* Make visible on hover */
+    transform: rotateY(0deg); /* Flip to normal */
+}
+
+
 
 @media (max-width : 978px){
     .navbtn button{
@@ -101,8 +261,115 @@ nav{
 
     #check:checked ~ .nav-content ul{
     left:0;
-    }
+    }  
+}
 
-    
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: auto;
+    max-width: 1200px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    flex: 0 0 calc(25% - 20px);
+    margin: 0 10px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.carousel-item.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.carousel-content {
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+}
+
+.see-all-card {
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.see-all-card:hover {
+    transform: translateY(-5px);
+}
+
+.see-all-card .carousel-content {
+    background: transparent;
+    text-align: center;
+}
+
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.carousel-prev:hover, .carousel-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.tag {
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 1024px) {
+    .carousel-item { flex: 0 0 calc(33.333% - 20px); }
+}
+
+@media (max-width: 768px) {
+    .carousel-item { flex: 0 0 calc(50% - 20px); }
+}
+
+@media (max-width: 480px) {
+    .carousel-item { flex: 0 0 calc(100% - 20px); }
 }
 
