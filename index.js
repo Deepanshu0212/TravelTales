@@ -1,34 +1,19 @@
 
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     const aboutSection = document.querySelector('.about_section');
-    //     const imageSection = document.querySelector('.image_section');
-    //     const contentSection = document.querySelector('.content_section');
+document.addEventListener('scroll', function() {
+    const aboutSection = document.querySelector('.about_section');
+    const imageSection = document.querySelector('.image_section');
+    const contentSection = document.querySelector('.content_section');
+    
+    // Get the position of the about section relative to the viewport
+    const sectionPosition = aboutSection.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.3; // Adjust as necessary
 
-    //     // Function to check if the section is in view
-    //     function isInViewport(element) {
-    //         const rect = element.getBoundingClientRect();
-    //         return (
-    //             rect.top >= 0 &&
-    //             rect.left >= 0 &&
-    //             rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    //             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    //         );
-    //     }
-
-    //     // Event listener for scrolling
-    //     window.addEventListener('scroll', function () {
-    //         if (isInViewport(aboutSection)) {
-    //             // Trigger the flip animation when the section comes into view
-    //             imageSection.style.animation = 'flipIn 1s ease forwards';
-    //             contentSection.style.animation = 'flipIn 1.5s ease forwards';
-    //         }
-    //     });
-    // });
-
-
-
-
-
+    // When section is scrolled into view, make the sections visible
+    if (sectionPosition < screenPosition) {
+        imageSection.classList.add('visible');
+        contentSection.classList.add('visible');
+    }
+});
 
 
     document.addEventListener('DOMContentLoaded', function() {
