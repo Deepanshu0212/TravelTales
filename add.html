@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Blog</title>
+    <link rel="stylesheet" href="add.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="community-section">
+            <h1>Be a part of our community</h1>
+            <p>Express your feelings</p>
+            <button id="write-blog-btn">Write your blog</button>
+        </div>
+        
+        <div id="blog-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn"><i class="fas fa-times"></i></span>
+                <h2>Create Your Blog</h2>
+                <form id="blog-form">
+                    <div class="form-group">
+                        <label for="blog-title">Blog Title</label>
+                        <input type="text" id="blog-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-content">Blog Content</label>
+                        <textarea id="blog-content" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="blog-continent">Continent</label>
+                            <input type="text" id="blog-continent" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="blog-country">Country</label>
+                            <input type="text" id="blog-country" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-place">Place</label>
+                        <input type="text" id="blog-place" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags (select multiple)</label>
+                        <div id="tag-options">
+                            <label><input type="checkbox" name="blog-tags" value="travel"> Travel</label>
+                            <label><input type="checkbox" name="blog-tags" value="food"> Food</label>
+                            <label><input type="checkbox" name="blog-tags" value="culture"> Culture</label>
+                            <label><input type="checkbox" name="blog-tags" value="adventure"> Adventure</label>
+                            <label><input type="checkbox" name="blog-tags" value="nature"> Nature</label>
+                            <label><input type="checkbox" name="blog-tags" value="city"> City</label>
+                            <label><input type="checkbox" name="blog-tags" value="history"> History</label>
+                            <label><input type="checkbox" name="blog-tags" value="art"> Art</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-image">Upload Image</label>
+                        <input type="file" id="blog-image" accept="image/*">
+                    </div>
+                    <div class="button-group">
+                        <button type="button" id="save-draft-btn">Save as Draft</button>
+                        <button type="submit" id="publish-btn">Publish Blog</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="add.js"></script>
+</body>
+</html>

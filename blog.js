@@ -26,20 +26,20 @@
             });
         }
 
-        function filterBlogs() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const tagFilter = document.getElementById('tagFilter').value.toLowerCase();
+        // function filterBlogs() {
+        //     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        //     const tagFilter = document.getElementById('tagFilter').value.toLowerCase();
             
-            const filteredBlogs = blogs.filter(blog => 
-                blog.destination.toLowerCase().includes(searchTerm) &&
-                (tagFilter === '' || blog.tags.includes(tagFilter))
-            );
+        //     const filteredBlogs = blogs.filter(blog => 
+        //         blog.destination.toLowerCase().includes(searchTerm) &&
+        //         (tagFilter === '' || blog.tags.includes(tagFilter))
+        //     );
             
-            renderBlogs(filteredBlogs);
-        }
+        //     renderBlogs(filteredBlogs);
+        // }
 
-        document.getElementById('searchInput').addEventListener('input', filterBlogs);
-        document.getElementById('tagFilter').addEventListener('change', filterBlogs);
+        // document.getElementById('searchInput').addEventListener('input', filterBlogs);
+        // document.getElementById('tagFilter').addEventListener('change', filterBlogs);
 
         // Initial render
         renderBlogs(blogs);

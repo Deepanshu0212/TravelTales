@@ -26,21 +26,7 @@
             margin: 0;
             font-size: 2.5em;
         }
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .search-container, .filter-container {
-            flex: 1;
-            margin-right: 10px;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #bdc3c7;
-            border-radius: 4px;
-        }
+        
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -99,20 +85,7 @@
         <h1>My Travel Adventures</h1>
     </header>
     
-    <div class="controls">
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search by destination...">
-        </div>
-        <div class="filter-container">
-            <select id="tagFilter">
-                <option value="">Filter by tag</option>
-                <option value="mountain">Mountain</option>
-                <option value="jungle">Jungle</option>
-                <option value="beach">Beach</option>
-                <option value="city">City</option>
-            </select>
-        </div>
-    </div>
+    
     
     <div class="blog-grid" id="blogGrid"></div>
      
