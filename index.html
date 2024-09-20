@@ -25,6 +25,10 @@
              <li><a href="#">About Us</a></li>
              <div class="navbtn">
                <button id="loginButton">Login</button>
+               <div id="userDropdown" class="dropdown-menu" style="display: none;">
+                <button id="viewProfile"><a href="profile.html">View Profile</a></button>
+                <button id="logoutButton">Log Out</button>
+               </div>
             </div>
           </ul>
          </div>
@@ -35,40 +39,39 @@
 
      <!-- Code for login signup  -->
      <div class="container" id="container">
-      <button id="closeButton"><i class="fa-solid fa-cross"></i></button>
-      <div class="form-container sign-up-container">
-          <form action="#" id="signupForm">
-              <h1>Create Account</h1>
-              <input type="text" placeholder="Name" id="signupName" required />
-              <input type="email" placeholder="Email" id="signupEmail" required />
-              <input type="password" placeholder="Password" id="signupPassword" required />
-              <button type="submit">Sign Up</button>
-          </form>
-      </div>
-      <div class="form-container sign-in-container">
-          <form action="#" id="signinForm">
-              <h1>Sign in</h1>
-              <input type="email" placeholder="Email" id="signinEmail" required />
-              <input type="password" placeholder="Password" id="signinPassword" required />
-              <button class="signbtn"type="submit">Sign In</button>
-          </form>
-      </div>
-      <div class="overlay-container">
-          <div class="overlay">
-              <div class="overlay-panel overlay-left">
-                  <h1>Welcome Back!</h1>
-                  <p>To keep connected with us please login with your personal info</p>
-                  <button class="ghost" id="signIn">Sign In</button>
-              </div>
-              <div class="overlay-panel overlay-right">
-                  <h1>Hello, Friend!</h1>
-                  <p>Start your journey by entering personal info</p>
-                  <button class="ghost signbtn" id="signUp">Sign Up</button>
-              </div>
-          </div>
-      </div>
-  </div>
-
+        <button id="closeButton"><i class="fas fa-times"></i></button>
+        <div class="form-container sign-up-container">
+            <form action="#" id="signupForm" class="loginform">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="Name" id="signupName" required />
+                <input type="email" placeholder="Email" id="signupEmail" required />
+                <input type="password" placeholder="Password" id="signupPassword" required />
+                <button type="submit" class="signbtn">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#" id="signinForm" class="loginform">
+                <h1>Sign in</h1>
+                <input type="email" placeholder="Email" id="signinEmail" required />
+                <input type="password" placeholder="Password" id="signinPassword" required />
+                <button type="submit" class="signbtn">Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost signbtn" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button class="ghost signbtn" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
       <div class="hero-section">

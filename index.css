@@ -40,17 +40,67 @@ nav{
     width:300px;
 }
 
-.navbtn button {
+.navbtn {
+    position: relative;
+    display: inline-block;
+}
+
+.navbtn button { 
     background-color: transparent;
-    height:50px;
-    width:100px;
+    height: 50px;
+    width: 150px;
     color: rgb(225, 121, 16);
     font-size: 20px;
     border-radius: 4px;
     border: 2px rgb(225, 121, 16) solid;
     display: block;
-    margin-left: 150px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto; /* Adjusted */
+    margin-right: auto; /* Adjusted */
 }
+
+.navbtn button:hover {
+    background-color: rgba(225, 121, 16, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 60px; /* Slightly below the button */
+    left: 50%; /* Align to the center of the button */
+    transform: translateX(-50%); /* Centering the dropdown */
+    background-color: white;
+    border: 2px rgb(225, 121, 16) solid;
+    border-radius: 4px;
+    width: 150px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    color: rgb(225, 121, 16);
+    text-align: left;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid rgba(225, 121, 16, 0.3);
+}
+
+.dropdown-menu button:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu button:hover {
+    background-color: rgba(225, 121, 16, 0.1);
+}
+
+
+
 
 #checkbtn{
     font-size: 30px;
@@ -95,7 +145,7 @@ body {
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     text-align: center;
-    z-index: 10;
+    z-index: 1;
     position: relative;
     margin-bottom: 100px; /* Adjust to center text with the path */
 }
@@ -356,6 +406,8 @@ body {
 
  /* css for create blog  */
 
+
+
  .community-section {
     background-image: url(./images/createblogback.jpg);
     background-size: cover;
@@ -365,7 +417,6 @@ body {
     text-align: center;
     padding: 40px;
     background-position: center center;
-
     margin-bottom: 200px;
 }
 
@@ -555,8 +606,11 @@ select[multiple] {
 
 
 
+
+
+
 /* styling for login-signup */
-/* .container {
+.container {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -577,6 +631,7 @@ select[multiple] {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
+    z-index:5;
 }
 
 .form-container {
@@ -728,7 +783,7 @@ p {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-form {
+.loginform {
     background-color: #FFFFFF;
     display: flex;
     align-items: center;
@@ -768,7 +823,7 @@ input:focus {
 
 #closeButton:hover {
     color: #00c6ff;
-} */
+}
 
 @media (max-width: 768px) {
     .container {
