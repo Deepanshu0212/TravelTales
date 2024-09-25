@@ -361,3 +361,97 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 });
+
+class DestinationCarousel {
+    constructor(containerId, destinations) {
+        this.container = document.getElementById(containerId);
+        this.destinations = destinations;
+        this.currentDestination = 0;
+        this.currentImage = 0;
+        this.init();
+    }
+
+    init() {
+        this.container.innerHTML = `
+            <div class="carousel-dest">
+                <h1>Some Top Destinations</h1>
+                <div class="destination-display" id="destinationDisplay"></div>
+                <div class="destination-list" id="destinationList"></div>
+            </div>
+        `;
+        this.displayElement = this.container.querySelector('#destinationDisplay');
+        this.listElement = this.container.querySelector('#destinationList');
+        this.createDestinationElements();
+        this.startCarousel();
+    }
+
+    createDestinationElements() {
+        this.destinations.forEach((dest, index) => {
+            const destElement = document.createElement('div');
+            destElement.className = `destination ${index === 0 ? 'active' : ''}`;
+            destElement.innerHTML = `
+                <img src="${dest.images[0]}" alt="${dest.name}">
+                <h2>${dest.name}</h2>
+            `;
+            this.displayElement.appendChild(destElement);
+
+            const listItem = document.createElement('div');
+            listItem.className = `destination-item ${index === 0 ? 'active' : ''}`;
+            listItem.textContent = dest.name;
+            listItem.onclick = () => this.jumpToDestination(index);
+            this.listElement.appendChild(listItem);
+        });
+    }
+
+    nextDestination() {
+        const current = this.displayElement.children[this.currentDestination];
+        current.classList.remove('active');
+        this.listElement.children[this.currentDestination].classList.remove('active');
+
+        this.currentDestination = (this.currentDestination + 1) % this.destinations.length;
+        this.currentImage = 0;
+
+        const next = this.displayElement.children[this.currentDestination];
+        next.classList.add('active');
+        this.listElement.children[this.currentDestination].classList.add('active');
+    }
+
+    nextImage() {
+        const dest = this.destinations[this.currentDestination];
+        this.currentImage = (this.currentImage + 1) % dest.images.length;
+        const imgElement = this.displayElement.children[this.currentDestination].querySelector('img');
+        imgElement.src = dest.images[this.currentImage];
+    }
+
+    jumpToDestination(index) {
+        if (index === this.currentDestination) return;
+
+        this.displayElement.children[this.currentDestination].classList.remove('active');
+        this.listElement.children[this.currentDestination].classList.remove('active');
+
+        this.currentDestination = index;
+        this.currentImage = 0;
+
+        this.displayElement.children[this.currentDestination].classList.add('active');
+        this.listElement.children[this.currentDestination].classList.add('active');
+
+        const imgElement = this.displayElement.children[this.currentDestination].querySelector('img');
+        imgElement.src = this.destinations[this.currentDestination].images[this.currentImage];
+    }
+
+    startCarousel() {
+        setInterval(() => this.nextImage(), 3000);
+        setInterval(() => this.nextDestination(), 6000);
+    }
+}
+
+// Usage
+const destinations = [
+    { name: "Paris", images: ["/images/bg9.jpg", "https://via.placeholder.com/800x400?text=Paris+2"] },
+    { name: "Tokyo", images: ["https://via.placeholder.com/800x400?text=Tokyo+1", "https://via.placeholder.com/800x400?text=Tokyo+2"] },
+    { name: "New York", images: ["https://via.placeholder.com/800x400?text=New+York+1", "https://via.placeholder.com/800x400?text=New+York+2"] },
+    { name: "Sydney", images: ["https://via.placeholder.com/800x400?text=Sydney+1", "https://via.placeholder.com/800x400?text=Sydney+2"] },
+    { name: "Rio de Janeiro", images: ["https://via.placeholder.com/800x400?text=Rio+1", "https://via.placeholder.com/800x400?text=Rio+2"] }
+];
+
+new DestinationCarousel('carouselContainer', destinations);
