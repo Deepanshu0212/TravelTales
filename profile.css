@@ -14,7 +14,6 @@ body {
     max-width: 900px;
     margin: 0 auto;
 }
-
 .profile-card {
     background-color: #fff;
     padding: 20px;
@@ -22,37 +21,64 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
-
 .profile-header {
     display: flex;
     align-items: center;
 }
-
 .profile-img img {
     border-radius: 50%;
     width: 150px;
     height: 150px;
+    object-fit: cover;
     margin-right: 20px;
 }
-
 .profile-info h2 {
     margin-bottom: 5px;
     color: #007bff;
 }
-
 .profile-info p {
     color: #777;
 }
-
 .profile-stats {
     display: flex;
     gap: 30px;
     margin-top: 10px;
 }
-
 .profile-stats div {
     text-align: center;
 }
+#editProfileBtn, #saveProfileBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+#editProfileBtn:hover, #saveProfileBtn:hover {
+    background-color: #0056b3;
+}
+#editForm {
+    display: none;
+    margin-top: 20px;
+}
+#editForm input, #editForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+#editForm label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+
 
 
 /* General carousel container styling */

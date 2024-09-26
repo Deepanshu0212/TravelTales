@@ -13,8 +13,7 @@
         <div class="profile-card">
             <div class="profile-header">
                 <div class="profile-img">
-                    <!-- Placeholder image -->
-                    <img src="https://via.placeholder.com/150" alt="User Profile">
+                    <img src="https://via.placeholder.com/150" alt="User Profile" id="profileImage">
                 </div>
                 <div class="profile-info">
                     <h2 id="userName">John Doe</h2>
@@ -24,19 +23,21 @@
                             <h3 id="blogCount">0</h3>
                             <p>Blogs</p>
                         </div>
-                        <div>
-                            <h3 id="viewCount">0</h3>
-                            <p>Views</p>
-                        </div>
-                        <div>
-                            <h3 id="likeCount">0</h3>
-                            <p>Likes</p>
-                        </div>
                     </div>
                 </div>
             </div>
             <button id="editProfileBtn">Edit Profile</button>
+            <form id="editForm">
+                <label for="editName">Name:</label>
+                <input type="text" id="editName" required>
+                <label for="editDescription">Description:</label>
+                <textarea id="editDescription" rows="3" required></textarea>
+                <label for="editImage">Profile Image:</label>
+                <input type="file" id="editImage" accept="image/*">
+                <button type="submit" id="saveProfileBtn">Save Changes</button>
+            </form>
         </div>
+    </div>
 
 
         <div class="carousel-container">
@@ -113,7 +114,6 @@
                 <input type="file" id="blog-image" accept="image/*">
             </div>
             <div class="button-group">
-                <!-- <button type="button" id="save-draft-btn">Save as Draft</button> -->
                 <button type="submit" id="publish-btn">Update Blog</button>
             </div>
         </form>

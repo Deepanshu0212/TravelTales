@@ -108,6 +108,7 @@ document.addEventListener('scroll', function() {
 
 
 
+    
     // for login signup
 const loginButton = document.getElementById('loginButton');
 const closeButton = document.getElementById('closeButton');

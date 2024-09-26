@@ -3,165 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite Destination Carousel</title>
+    <title>Travel Tales Profile</title>
     <style>
-        .carousel-dest {
+        body {
             font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            height: 500px;
-            width: 100%;
-            max-width: 800px;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .profile-container {
+            max-width: 900px;
             margin: 0 auto;
         }
-        .destination-display {
-            flex-grow: 1;
-            position: relative;
-            overflow: hidden;
+        .profile-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
-        .destination {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .profile-header {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
         }
-        .destination.active {
-            opacity: 1;
-        }
-        .destination img {
-            width: 100%;
-            height: 70%;
+        .profile-img img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
             object-fit: cover;
+            margin-right: 20px;
         }
-        .destination h2 {
-            font-size: 2em;
-            margin: 20px 0;
+        .profile-info h2 {
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+        .profile-info p {
+            color: #777;
+        }
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 10px;
+        }
+        .profile-stats div {
             text-align: center;
         }
-        .destination-list {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-        .destination-item {
-            margin: 0 10px;
-            padding: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .destination-item:hover,
-        .destination-item.active {
+        #editProfileBtn, #saveProfileBtn {
             background-color: #007bff;
             color: white;
+            border: none;
+            padding: 10px 20px;
             border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        #editProfileBtn:hover, #saveProfileBtn:hover {
+            background-color: #0056b3;
+        }
+        #editForm {
+            display: none;
+            margin-top: 20px;
+        }
+        #editForm input, #editForm textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #editForm label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <div id="carouselContainer"></div>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-img">
+                    <img src="https://via.placeholder.com/150" alt="User Profile" id="profileImage">
+                </div>
+                <div class="profile-info">
+                    <h2 id="userName">John Doe</h2>
+                    <p id="userDescription">Avid traveler | Photographer | Food enthusiast</p>
+                    <div class="profile-stats">
+                        <div>
+                            <h3 id="blogCount">0</h3>
+                            <p>Blogs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="editProfileBtn">Edit Profile</button>
+            <form id="editForm">
+                <label for="editName">Name:</label>
+                <input type="text" id="editName" required>
+                <label for="editDescription">Description:</label>
+                <textarea id="editDescription" rows="3" required></textarea>
+                <label for="editImage">Profile Image:</label>
+                <input type="file" id="editImage" accept="image/*">
+                <button type="submit" id="saveProfileBtn">Save Changes</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        class DestinationCarousel {
-            constructor(containerId, destinations) {
-                this.container = document.getElementById(containerId);
-                this.destinations = destinations;
-                this.currentDestination = 0;
-                this.currentImage = 0;
-                this.init();
-            }
+        const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+        const data = JSON.parse(localStorage.getItem('data')) || [];
+        let userData = data.find(user => user.name === currentUser.name) || {};
 
-            init() {
-                this.container.innerHTML = `
-                    <div class="carousel-dest">
-                        <h1>Some Top Destinations</h1>
-                        <div class="destination-display" id="destinationDisplay"></div>
-                        <div class="destination-list" id="destinationList"></div>
-                    </div>
-                `;
-                this.displayElement = this.container.querySelector('#destinationDisplay');
-                this.listElement = this.container.querySelector('#destinationList');
-                this.createDestinationElements();
-                this.startCarousel();
-            }
+        const userName = document.getElementById('userName');
+        const userDescription = document.getElementById('userDescription');
+        const blogCount = document.getElementById('blogCount');
+        const profileImage = document.getElementById('profileImage');
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        const editForm = document.getElementById('editForm');
+        const editName = document.getElementById('editName');
+        const editDescription = document.getElementById('editDescription');
+        const editImage = document.getElementById('editImage');
 
-            createDestinationElements() {
-                this.destinations.forEach((dest, index) => {
-                    const destElement = document.createElement('div');
-                    destElement.className = `destination ${index === 0 ? 'active' : ''}`;
-                    destElement.innerHTML = `
-                        <img src="${dest.images[0]}" alt="${dest.name}">
-                        <h2>${dest.name}</h2>
-                    `;
-                    this.displayElement.appendChild(destElement);
+        function updateProfile() {
+            userName.textContent = userData.name || currentUser.name;
+            userDescription.textContent = userData.description || "Traveler | Blogger";
+            blogCount.textContent = userData.blogs?.length || 0;
+            profileImage.src = userData.image || "https://via.placeholder.com/150";
+        }
 
-                    const listItem = document.createElement('div');
-                    listItem.className = `destination-item ${index === 0 ? 'active' : ''}`;
-                    listItem.textContent = dest.name;
-                    listItem.onclick = () => this.jumpToDestination(index);
-                    this.listElement.appendChild(listItem);
-                });
-            }
-
-            nextDestination() {
-                const current = this.displayElement.children[this.currentDestination];
-                current.classList.remove('active');
-                this.listElement.children[this.currentDestination].classList.remove('active');
-
-                this.currentDestination = (this.currentDestination + 1) % this.destinations.length;
-                this.currentImage = 0;
-
-                const next = this.displayElement.children[this.currentDestination];
-                next.classList.add('active');
-                this.listElement.children[this.currentDestination].classList.add('active');
-            }
-
-            nextImage() {
-                const dest = this.destinations[this.currentDestination];
-                this.currentImage = (this.currentImage + 1) % dest.images.length;
-                const imgElement = this.displayElement.children[this.currentDestination].querySelector('img');
-                imgElement.src = dest.images[this.currentImage];
-            }
-
-            jumpToDestination(index) {
-                if (index === this.currentDestination) return;
-
-                this.displayElement.children[this.currentDestination].classList.remove('active');
-                this.listElement.children[this.currentDestination].classList.remove('active');
-
-                this.currentDestination = index;
-                this.currentImage = 0;
-
-                this.displayElement.children[this.currentDestination].classList.add('active');
-                this.listElement.children[this.currentDestination].classList.add('active');
-
-                const imgElement = this.displayElement.children[this.currentDestination].querySelector('img');
-                imgElement.src = this.destinations[this.currentDestination].images[this.currentImage];
-            }
-
-            startCarousel() {
-                setInterval(() => this.nextImage(), 3000);
-                setInterval(() => this.nextDestination(), 6000);
+        function toggleEditMode() {
+            if (editForm.style.display === 'none' || editForm.style.display === '') {
+                editForm.style.display = 'block';
+                editProfileBtn.textContent = 'Cancel';
+                editName.value = userData.name || currentUser.name;
+                editDescription.value = userData.description || "";
+            } else {
+                editForm.style.display = 'none';
+                editProfileBtn.textContent = 'Edit Profile';
             }
         }
 
-        // Usage
-        const destinations = [
-            { name: "Paris", images: ["/images/bg9.jpg", "https://via.placeholder.com/800x400?text=Paris+2"] },
-            { name: "Tokyo", images: ["https://via.placeholder.com/800x400?text=Tokyo+1", "https://via.placeholder.com/800x400?text=Tokyo+2"] },
-            { name: "New York", images: ["https://via.placeholder.com/800x400?text=New+York+1", "https://via.placeholder.com/800x400?text=New+York+2"] },
-            { name: "Sydney", images: ["https://via.placeholder.com/800x400?text=Sydney+1", "https://via.placeholder.com/800x400?text=Sydney+2"] },
-            { name: "Rio de Janeiro", images: ["https://via.placeholder.com/800x400?text=Rio+1", "https://via.placeholder.com/800x400?text=Rio+2"] }
-        ];
+        editProfileBtn.addEventListener('click', toggleEditMode);
 
-        new DestinationCarousel('carouselContainer', destinations);
+        editForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const imageFile = editImage.files[0];
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    userData = {
+                        ...userData,
+                        name: editName.value,
+                        description: editDescription.value,
+                        image: event.target.result // Set the image as base64 string
+                    };
+                    saveUserData();
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                userData = {
+                    ...userData,
+                    name: editName.value,
+                    description: editDescription.value
+                };
+                saveUserData();
+            }
+        });
+
+        function saveUserData() {
+            // Update localStorage
+            const userIndex = data.findIndex(user => user.name === currentUser.name);
+            if (userIndex !== -1) {
+                data[userIndex] = userData;
+            } else {
+                data.push(userData);
+            }
+            localStorage.setItem('data', JSON.stringify(data));
+            
+            updateProfile();
+            toggleEditMode();
+        }
+
+        updateProfile();
     </script>
 </body>
 </html>

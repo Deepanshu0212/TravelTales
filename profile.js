@@ -1,15 +1,80 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
-    const data = JSON.parse(localStorage.getItem('data')) || [];
+        const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+        const data = JSON.parse(localStorage.getItem('data')) || [];
+        let userData = data.find(user => user.name === currentUser.name) || {};
 
-    const userData = data.find(user => user.name === currentUser.name);
+        const userName = document.getElementById('userName');
+        const userDescription = document.getElementById('userDescription');
+        const blogCount = document.getElementById('blogCount');
+        const profileImage = document.getElementById('profileImage');
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        const editForm = document.getElementById('editForm');
+        const editName = document.getElementById('editName');
+        const editDescription = document.getElementById('editDescription');
+        const editImage = document.getElementById('editImage');
 
-    // Populate user profile
-    document.getElementById('userName').textContent = currentUser.name;
-    document.getElementById('userDescription').textContent = userData?.description || "Traveler | Blogger";
+        function updateProfile() {
+            userName.textContent = userData.name || currentUser.name;
+            userDescription.textContent = userData.description || "Traveler | Blogger";
+            blogCount.textContent = userData.blogs?.length || 0;
+            profileImage.src = userData.image || "https://via.placeholder.com/150";
+        }
 
-    // Show blog and draft counts
-    document.getElementById('blogCount').textContent = userData?.blogs.length || 0;
+        function toggleEditMode() {
+            if (editForm.style.display === 'none' || editForm.style.display === '') {
+                editForm.style.display = 'block';
+                editProfileBtn.textContent = 'Cancel';
+                editName.value = userData.name || currentUser.name;
+                editDescription.value = userData.description || "";
+            } else {
+                editForm.style.display = 'none';
+                editProfileBtn.textContent = 'Edit Profile';
+            }
+        }
+
+        editProfileBtn.addEventListener('click', toggleEditMode);
+
+        editForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const imageFile = editImage.files[0];
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    userData = {
+                        ...userData,
+                        name: editName.value,
+                        description: editDescription.value,
+                        image: event.target.result // Set the image as base64 string
+                    };
+                    saveUserData();
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                userData = {
+                    ...userData,
+                    name: editName.value,
+                    description: editDescription.value
+                };
+                saveUserData();
+            }
+        });
+
+        function saveUserData() {
+            // Update localStorage
+            const userIndex = data.findIndex(user => user.name === currentUser.name);
+            if (userIndex !== -1) {
+                data[userIndex] = userData;
+            } else {
+                data.push(userData);
+            }
+            localStorage.setItem('data', JSON.stringify(data));
+            
+            updateProfile();
+            toggleEditMode();
+        }
+
+        updateProfile();
     
 
     let blogs = userData.blogs || [];
@@ -123,121 +188,132 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+    
+
     // Edit blog function
-    window.editBlog = function (index, type) {
-        const blog = (type === 'blog') ? userData.blogs[index] : userData.drafts[index];
-        openBlogModal(blog, index, type);
-    };
+    // Edit blog function
+window.editBlog = function (index, type) {
+    const blog = (type === 'blog') ? userData.blogs[index] : userData.drafts[index];
+    openBlogModal(blog, index, type);
+};
 
-    // Delete blog function
-    window.deleteBlog = function (index, type) {
-        if (confirm("Are you sure you want to delete this blog?")) {
-            if (type === 'blog') {
-                userData.blogs.splice(index, 1);
-            } else {
-                userData.drafts.splice(index, 1);
-            }
-            updateLocalStorage();
-            location.reload();
+// Delete blog function
+window.deleteBlog = function (index, type) {
+    if (confirm("Are you sure you want to delete this blog?")) {
+        if (type === 'blog') {
+            userData.blogs.splice(index, 1);
+        } else {
+            userData.drafts.splice(index, 1);
         }
-    };
+        updateLocalStorage();
+        location.reload();
+    }
+};
 
+// Blog edit handling
+const blogPopup = document.getElementById('blog-popup');
+const closeBtn = document.querySelector('.close-btn');
+const blogForm = document.getElementById('blog-form');
 
-    // Blog edit handling
-    const blogPopup = document.getElementById('blog-popup');
-    const closeBtn = document.querySelector('.close-btn');
-    const blogForm = document.getElementById('blog-form');
+function openBlogModal(blog, index, type) {
+    blogPopup.style.display = 'block';
+    document.getElementById('blog-title').value = blog.title;
+    document.getElementById('blog-content').value = blog.content;
+    document.getElementById('blog-continent').value = blog.continent;
+    document.getElementById('blog-country').value = blog.country;
+    document.getElementById('blog-place').value = blog.place;
 
-    function openBlogModal(blog, index, type) {
-        blogPopup.style.display = 'block';
-        document.getElementById('blog-title').value = blog.title;
-        document.getElementById('blog-content').value = blog.content;
-        document.getElementById('blog-continent').value = blog.continent;
-        document.getElementById('blog-country').value = blog.country;
-        document.getElementById('blog-place').value = blog.place;
+    // Uncheck all tags first
+    const tagInputs = document.querySelectorAll('input[name="blog-tags"]');
+    tagInputs.forEach(input => input.checked = false);
 
+    // Check the appropriate tags
+    blog.tags.forEach(tag => {
+        const tagInput = document.querySelector(`input[name="blog-tags"][value="${tag}"]`);
+        if (tagInput) {
+            tagInput.checked = true;
+        }
+    });
 
-        // Uncheck all tags first
-        const tagInputs = document.querySelectorAll('input[name="blog-tags"]');
-        tagInputs.forEach(input => input.checked = false);
-
-        // Check the appropriate tags
-        blog.tags.forEach(tag => {
-            const tagInput = document.querySelector(`input[name="blog-tags"][value="${tag}"]`);
-            if (tagInput) {
-                tagInput.checked = true;
-            }
-        });
-
-        blogForm.onsubmit = (e) => {
-
-            console.log("hello");
+    const publishBtn = document.getElementById('publish-btn');
+    
+    if (type === 'draft') {
+        publishBtn.textContent = 'Publish Blog';
+        publishBtn.onclick = (e) => {
             e.preventDefault();
-            
-            const updatedBlog = {
-                title: document.getElementById('blog-title').value,
-                content: document.getElementById('blog-content').value,
-                continent: document.getElementById('blog-continent').value,
-                country: document.getElementById('blog-country').value,
-                place: document.getElementById('blog-place').value,
-                tags: Array.from(document.querySelectorAll('input[name="blog-tags"]:checked')).map(tag => tag.value),
-                image: null, // Initialize image property as null
-                createdAt: new Date().toISOString()
-            };
-            
-            const imageInput = document.getElementById('blog-image');
-        
-            if (imageInput.files[0]) {
-                const reader = new FileReader();
-        
-                reader.onload = function (event) {
-                    updatedBlog.image = event.target.result; // Set the image as a base64 string
-        
-                    // Update the blog in userData
-                    if (type === 'blog') {
-                        userData.blogs[index] = updatedBlog;
-                    } else {
-                        userData.drafts[index] = updatedBlog;
-                    }
-        
-                    updateLocalStorage();
-                    location.reload(); // Reload the page to reflect changes
-                };
-        
-                reader.readAsDataURL(imageInput.files[0]); // Read the image file
-            } else {
-                // If no image is selected, proceed to update the blog without the image
-                if (type === 'blog') {
-                    userData.blogs[index] = updatedBlog;
-                } else {
-                    userData.drafts[index] = updatedBlog;
-                }
-        
-                updateLocalStorage();
-                location.reload();
-            }
-            
-
-            blogPopup.style.display = 'none';
-
+            publishDraft(index);
         };
-
-
+    } else {
+        publishBtn.textContent = 'Update Blog';
+        publishBtn.onclick = null;
     }
 
-    closeBtn.onclick = () => {
+    blogForm.onsubmit = (e) => {
+        e.preventDefault();
+        
+        const updatedBlog = {
+            title: document.getElementById('blog-title').value,
+            content: document.getElementById('blog-content').value,
+            continent: document.getElementById('blog-continent').value,
+            country: document.getElementById('blog-country').value,
+            place: document.getElementById('blog-place').value,
+            tags: Array.from(document.querySelectorAll('input[name="blog-tags"]:checked')).map(tag => tag.value),
+            image: null,
+            createdAt: new Date().toISOString()
+        };
+        
+        const imageInput = document.getElementById('blog-image');
+    
+        if (imageInput.files[0]) {
+            const reader = new FileReader();
+    
+            reader.onload = function (event) {
+                updatedBlog.image = event.target.result;
+    
+                updateBlogData(type, index, updatedBlog);
+            };
+    
+            reader.readAsDataURL(imageInput.files[0]);
+        } else {
+            updateBlogData(type, index, updatedBlog);
+        }
+
         blogPopup.style.display = 'none';
     };
+}
 
-    window.onclick = (e) => {
-        if (e.target === blogModal) {
-            blogModal.style.display = 'none';
-        }
-    };
-
-    // Update localStorage
-    function updateLocalStorage() {
-        const updatedData = data.map(user => (user.name === currentUser.name) ? userData : user);
-        localStorage.setItem('data', JSON.stringify(updatedData));
+function updateBlogData(type, index, updatedBlog) {
+    if (type === 'blog') {
+        userData.blogs[index] = updatedBlog;
+    } else {
+        userData.drafts[index] = updatedBlog;
     }
+
+    updateLocalStorage();
+    location.reload();
+}
+
+function publishDraft(index) {
+    const draft = userData.drafts[index];
+    userData.blogs.push(draft);
+    userData.drafts.splice(index, 1);
+    updateLocalStorage();
+    location.reload();
+}
+
+closeBtn.onclick = () => {
+    blogPopup.style.display = 'none';
+};
+
+window.onclick = (e) => {
+    if (e.target === blogModal) {
+        blogModal.style.display = 'none';
+    }
+};
+
+// Update localStorage
+function updateLocalStorage() {
+    const updatedData = data.map(user => (user.name === currentUser.name) ? userData : user);
+    localStorage.setItem('data', JSON.stringify(updatedData));
+}
 });

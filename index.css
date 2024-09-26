@@ -15,7 +15,7 @@ nav{
     border-bottom: 1px gray solid;
     position: fixed;
     z-index: 100;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: white;
 }
 
 .nav-content ul {
@@ -113,11 +113,27 @@ nav{
 }
 
 .main{
-    width: 100%;
-    height: 100vh;
-    background-image: url(./images/background_main.jpg);
-    background-repeat: no-repeat;
+     background-image: url('./images/background_main.jpg');
+      height: 100vh; /* Full screen height */
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      animation: zoomInOut 10s infinite ease-in-out;
+      width:100%;
 }
+
+@keyframes zoomInOut {
+    0% {
+      background-size: 100%; /* Normal size */
+    }
+    50% {
+      background-size: 110%; /* Zoom in */
+    }
+    100% {
+      background-size: 100%; /* Zoom out back to normal */
+    }
+  }
 
 /* General reset */
 body {
@@ -295,6 +311,7 @@ body {
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    height:500px;
 }
 
 .carousel-item:hover {
@@ -313,6 +330,7 @@ body {
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 0 0 8px 8px;
+    height:300px;
 }
 .carousel-content h3 {
     margin: 0 0 10px;
@@ -325,13 +343,12 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    height: 100%; /* Ensure it fills the height */
-    border-radius: 10px; /* Match the other carousel items */
+    border-radius: 10px;
     transition: transform 0.3s ease;
-    flex: 0 0 calc(25% - 20px); /* Make the size consistent with other cards */
-    margin: 0 10px; /* Same margin as other items */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    overflow: hidden;
+    flex: 0 0 calc(25% - 20px);
+    margin: 0 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: 500px; /* Maintain the consistent height */
 }
 
 .see-all-card:hover {
@@ -340,30 +357,34 @@ body {
 }
 
 .see-all-card .carousel-content {
-    background: transparent; /* Keep background transparent for visual appeal */
-    text-align: center; /* Center the content */
-    padding: 20px; /* Ensure spacing inside the card is consistent */
-    box-shadow: none; /* No extra shadow needed */
-    border-radius: 0; /* No additional rounding inside the content */
-    height: 100%; 
+    background: transparent;
+    text-align: center;
+    padding: 40px 20px; /* Adjusted padding for better spacing */
+    box-shadow: none;
+    border-radius: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers the content */
 }
 
 .see-all-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    color: white; /* Ensure text is clearly visible */
+    font-size: 1.6rem; /* Slightly increased for better readability */
+    margin-bottom: 15px;
+    color: white;
 }
 
 .see-all-card p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    color: white; /* Make text color white for better contrast */
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: white;
 }
 
 .see-all-arrow i {
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Increased the icon size slightly */
     color: white;
 }
+
 .carousel-prev,
 .carousel-next {
     position: absolute;
@@ -377,13 +398,13 @@ body {
     border-radius: 50%;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: background 0.3s ease;
+    /* transition: background 0.3s ease; */
 }
 
-.carousel-prev:hover,
+/* .carousel-prev:hover,
 .carousel-next:hover {
     background: rgba(225, 121, 16, 1);
-}
+} */
 
 .carousel-prev { left: 10px; }
 .carousel-next { right: 10px; }
@@ -408,8 +429,6 @@ body {
 
 
  /* css for create blog  */
-
-
 
  .community-section {
     background-image: url(./images/createblogback.jpg);
@@ -607,15 +626,18 @@ select[multiple] {
 
 
 
+
+
 /* destination roulette */
 .carousel-dest {
+    /* margin-top:200px; */
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: 600px;
     width: 100%;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 130px auto;
 }
 .destination-display {
     flex-grow: 1;
