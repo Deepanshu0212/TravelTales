@@ -1,14 +1,135 @@
-body {
+
+*{
+    text-decoration: none;
+    list-style: none;
+    margin: 0px;
+    padding:0px;
+    box-sizing: border-box;
     font-family: 'Arial', sans-serif;
+}
+
+body{
+    background-color: #f4f4f4;
     line-height: 1.6;
     color: #333;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    box-sizing: border-box;
 }
-header {
+nav{
+    display: flex;
+    width:100%;
+    height:80px;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px gray solid;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    top:0px;
+}
+
+.nav-content ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.nav-content ul li a{
+    margin-right: 25px;
+    margin-left: 10px;
+    font-size: 20px;
+    color: black;
+    
+}
+
+.nav-content ul li a:hover{
+    color:rgb(238, 151, 37);
+    transition: 0.5s;
+}
+#logoimg{
+    height: 80px;
+    width:300px;
+}
+
+.navbtn {
+    position: relative;
+    display: inline-block;
+}
+
+.navbtn button { 
+    background-color: transparent;
+    height: 50px;
+    width: 150px;
+    color: rgb(225, 121, 16);
+    font-size: 20px;
+    border-radius: 4px;
+    border: 2px rgb(225, 121, 16) solid;
+    display: block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto; /* Adjusted */
+    margin-right: auto; /* Adjusted */
+}
+
+.navbtn button:hover {
+    background-color: rgba(225, 121, 16, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 60px; /* Slightly below the button */
+    left: 50%; /* Align to the center of the button */
+    transform: translateX(-50%); /* Centering the dropdown */
+    background-color: white;
+    border: 2px rgb(225, 121, 16) solid;
+    border-radius: 4px;
+    width: 150px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    color: rgb(225, 121, 16);
+    text-align: left;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid rgba(225, 121, 16, 0.3);
+}
+
+.dropdown-menu a{
+    color: rgb(225, 121, 16);
+}
+.dropdown-menu button:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu button:hover {
+    background-color: rgba(225, 121, 16, 0.1);
+}
+
+#checkbtn{
+    font-size: 30px;
+    float: right;
+    line-height: 80px;
+    display: none;
+}
+#check{
+    display: none;
+}
+
+
+
+.maincontent{
+    width:80%;
+    margin:100px auto;
+    
+}
+.headimg{
+
+    
     background-image: url(images/image\ copy.png);
     background-size:contain;
     background-position:center;
@@ -21,7 +142,7 @@ header {
     width:100%;
 }
 
-header h1{
+.headimg h1{
     margin-top: 20px;
     color: #042338;
 }
@@ -190,4 +311,44 @@ h1 {
     padding: 3px 8px;
     border-radius: 12px;
     font-size: 0.8em;
+}
+
+
+
+@media (max-width : 978px){
+    .navbtn button{
+        margin-left: 70px;
+    }
+}
+@media (max-width : 870px){
+    #checkbtn{
+        display: block;
+    }
+    .nav-content ul{
+        position: fixed;
+        width:100%;
+        height:100vh;
+        top:80px;
+        left:0;
+        text-align: center;
+        display: block;
+        background-color: rgba(180, 176, 172, 0.705);
+        left: -100%;
+        transition :  all .5s;
+    }
+
+    .nav-content ul li{
+        margin-top: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid black;
+    }
+    .navbtn button{
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #check:checked ~ .nav-content ul{
+    left:0;
+    }  
 }

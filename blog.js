@@ -1,3 +1,29 @@
+
+
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+const loginButton = document.getElementById('loginButton');
+if(currentUser){
+    loginButton.textContent = currentUser.name;
+}
+
+loginButton.addEventListener('click', () => {
+    
+    userDropdown.style.display = userDropdown.style.display === 'none' ? 'block' : 'none';
+});
+
+logoutButton.addEventListener('click',()=>{
+    localStorage.removeItem("currentUser"); // Remove current user
+    currentUser = null;
+    // Change button text to "Login"
+    loginButton.textContent = "Login";
+    alert("User logged out");
+    userDropdown.style.display= 'none';
+    window.location.href = './index.html';
+});
+
+
+
 const continents = [
     { name: 'Africa', image: '/images/africa.jpg' },
     { name: 'America', image: '/images/americas.jpg' },

@@ -16,100 +16,7 @@ document.addEventListener('scroll', function() {
 });
 
 
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const carouselTrack = document.querySelector('.carousel-track');
-        const prevButton = document.querySelector('.carousel-prev');
-        const nextButton = document.querySelector('.carousel-next');
-        let blogs = blogData; 
-
-        const itemsPerView = 4;
-        let currentIndex = 0;
-
-        function renderCarousel(blogs, container) {
-            container.innerHTML = '';
-            blogs.forEach((blog, index) => {
-                if (index < 5) {
-                    const blogItem = document.createElement('div');
-                    blogItem.classList.add('carousel-item');
-                    blogItem.innerHTML = `
-                        <img src="${blog.image}" alt="${blog.title}">
-                        <div class="carousel-content">
-                            <h3>${blog.title}</h3>
-                            <p>${blog.content}</p>
-                            <small><i class="far fa-calendar-alt"></i> ${new Date(blog.date).toLocaleDateString()}</small>
-                            <div class="tags">
-                                ${blog.tags.map(tag => `<span class="tag"><i class="fas fa-tag"></i> ${tag}</span>`).join('')}
-                            </div>
-                        </div>
-                    `;
-                    container.appendChild(blogItem);
-                }
-            });
-
-            const seeAllCard = document.createElement('div');
-            seeAllCard.classList.add('carousel-item', 'see-all-card');
-            seeAllCard.innerHTML = `
-                <div class="carousel-content">
-                    <h3><i class="fas fa-book-open"></i> See All Blogs</h3>
-                    <p>Explore our entire collection</p>
-                    <div class="see-all-arrow"><i class="fas fa-arrow-right"></i></div>
-                </div>
-            `;
-            seeAllCard.addEventListener('click', function() {
-                console.log('Navigate to all blogs page');
-            });
-            container.appendChild(seeAllCard);
-
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            const items = document.querySelectorAll('.carousel-item');
-            const totalItems = items.length;
-            
-            items.forEach((item, index) => {
-                if (index >= currentIndex && index < currentIndex + itemsPerView) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.classList.add('active');
-                    }, 50 * (index - currentIndex));
-                } else {
-                    item.classList.remove('active');
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
-
-            prevButton.style.display = currentIndex > 0 ? 'block' : 'none';
-            nextButton.style.display = currentIndex + itemsPerView < totalItems ? 'block' : 'none';
-        }
-
-        nextButton.addEventListener('click', function() {
-            const items = document.querySelectorAll('.carousel-item');
-            if (currentIndex + itemsPerView < items.length) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
-
-        prevButton.addEventListener('click', function() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-
-        renderCarousel(blogs, carouselTrack);
-    
-    });
-   
-
-
-
-    
-    // for login signup
+// for login signup
 const loginButton = document.getElementById('loginButton');
 const closeButton = document.getElementById('closeButton');
 const container = document.getElementById('container');
@@ -133,13 +40,13 @@ loginButton.addEventListener('click', () => {
 });
 
 logoutButton.addEventListener('click',()=>{
-    // Log the user out
     localStorage.removeItem("currentUser"); // Remove current user
     currentUser = null;
-
     // Change button text to "Login"
     loginButton.textContent = "Login";
     alert("User logged out");
+    userDropdown.style.display= 'none';
+    window.location.href = './index.html';
 });
 
 
@@ -251,6 +158,146 @@ window.addEventListener('load', () => {
 
 
 
+    document.addEventListener('DOMContentLoaded', function carousel() {
+        const carouselTrack = document.querySelector('.carousel-track');
+        const prevButton = document.querySelector('.carousel-prev');
+        const nextButton = document.querySelector('.carousel-next');
+        let blogs = blogData; 
+
+        const itemsPerView = 4;
+        let currentIndex = 0;
+
+        function renderCarousel(blogs, container) {
+            container.innerHTML = '';
+            blogs.forEach((blog, index) => {
+                if (index < 5) {
+                    const blogItem = document.createElement('div');
+                    blogItem.classList.add('carousel-item');
+                    blogItem.innerHTML = `
+                        <img src="${blog.image}" alt="${blog.title}">
+                        <div class="carousel-content">
+                            <h3>${blog.title}</h3>
+                            <p>${blog.content}</p>
+                            <small><i class="far fa-calendar-alt"></i> ${new Date(blog.date).toLocaleDateString()}</small>
+                            <div class="tags">
+                                ${blog.tags.map(tag => `<span class="tag"><i class="fas fa-tag"></i> ${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(blogItem);
+                }
+            });
+
+            const seeAllCard = document.createElement('div');
+            seeAllCard.classList.add('carousel-item', 'see-all-card');
+            seeAllCard.innerHTML = `
+                <div class="carousel-content">
+                    <h3><i class="fas fa-book-open"></i> See All Blogs</h3>
+                    <p>Explore our entire collection</p>
+                    <div class="see-all-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            `;
+            seeAllCard.addEventListener('click', function() {
+
+                const currentUser = localStorage.getItem('currentUser');
+                const container = document.getElementById('container');
+                console.log(currentUser);
+                if (currentUser) {
+                    console.log("hii");
+                    window.location.href = './blog.html';
+                } else {
+                    container.classList.add('active'); 
+                    document.body.style.overflow = 'hidden';
+                }
+
+            });
+            container.appendChild(seeAllCard);
+
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const items = document.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+            
+            items.forEach((item, index) => {
+                if (index >= currentIndex && index < currentIndex + itemsPerView) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.classList.add('active');
+                    }, 50 * (index - currentIndex));
+                } else {
+                    item.classList.remove('active');
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+
+            prevButton.style.display = currentIndex > 0 ? 'block' : 'none';
+            nextButton.style.display = currentIndex + itemsPerView < totalItems ? 'block' : 'none';
+        }
+
+        nextButton.addEventListener('click', function() {
+            const items = document.querySelectorAll('.carousel-item');
+            if (currentIndex + itemsPerView < items.length) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        prevButton.addEventListener('click', function() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        renderCarousel(blogs, carouselTrack);
+    
+    });
+   
+
+
+
+    
+
+
+
+document.getElementById('blogLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default action of navigating to blog.html
+    
+    // Check if the current user is logged in
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (currentUser) {
+        window.location.href = './blog.html';
+    } else {
+        container.classList.add('active'); 
+        document.body.style.overflow = 'hidden';
+    }
+});
+
+document.getElementById('guideLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default action of navigating to blog.html
+    
+    // Check if the current user is logged in
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (currentUser) {
+        window.location.href = './guide.html';
+    } else {
+        container.classList.add('active'); 
+        document.body.style.overflow = 'hidden';
+    }
+});
+
+
+
+
+
+
+
 
 
 
@@ -271,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
             blogPopup.style.display = 'block';
             document.body.style.overflow = 'hidden';
         } else {
-            container.classList.add('active'); // Show login/signup popup if not logged in
+            container.classList.add('active'); 
             document.body.style.overflow = 'hidden';
         }
     });
@@ -444,15 +491,16 @@ class DestinationCarousel {
         setInterval(() => this.nextImage(), 3000);
         setInterval(() => this.nextDestination(), 6000);
     }
+
 }
 
 // Usage
 const destinations = [
-    { name: "Paris", images: ["/images/bg9.jpg", "https://via.placeholder.com/800x400?text=Paris+2"] },
-    { name: "Tokyo", images: ["https://via.placeholder.com/800x400?text=Tokyo+1", "https://via.placeholder.com/800x400?text=Tokyo+2"] },
-    { name: "New York", images: ["https://via.placeholder.com/800x400?text=New+York+1", "https://via.placeholder.com/800x400?text=New+York+2"] },
-    { name: "Sydney", images: ["https://via.placeholder.com/800x400?text=Sydney+1", "https://via.placeholder.com/800x400?text=Sydney+2"] },
-    { name: "Rio de Janeiro", images: ["https://via.placeholder.com/800x400?text=Rio+1", "https://via.placeholder.com/800x400?text=Rio+2"] }
+    { name: "Paris", images: ["/images/Paris1.jpg", "/images/Paris2.jpg"] },
+    { name: "Tokyo", images: ["/images/Tokyo1.jpg", "/images/Tokyo2.jpeg"] },
+    { name: "New York", images: ["/images/NewYork1.jpg", "/images/NewYork2.jpeg"] },
+    { name: "Sydney", images: ["/images/Sydney1.jpg", "/images/Sydney2.jpg"] },
+    { name: "Rio de Janeiro", images: ["/images/Rio1.jpg", "/images/Rio2.jpg"] }
 ];
 
 new DestinationCarousel('carouselContainer', destinations);
