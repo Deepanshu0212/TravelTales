@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname)));
 
 // Serve index.html for the root route
 app.get("/", (req, res) => {
-    const indexPath = path.join(__dirname, "Index", "index.html");
+    const indexPath = path.join(__dirname, "index.html");
     
     fs.access(indexPath, fs.constants.F_OK, (err) => {
         if (err) {

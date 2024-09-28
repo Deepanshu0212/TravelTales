@@ -19,7 +19,7 @@ logoutButton.addEventListener('click',()=>{
     loginButton.textContent = "Login";
     alert("User logged out");
     userDropdown.style.display= 'none';
-    window.location.href = '..Index/index.html';
+    window.location.href = '../index.html';
 });
 
 
