@@ -32,7 +32,7 @@ nav{
 }
 
 .nav-content ul li a:hover{
-    color:rgb(238, 151, 37);
+    color:rgb(225, 121, 16);
     transition: 0.5s;
 }
 #logoimg{
@@ -187,8 +187,8 @@ body {
     font-size: 48px;
     color: #e74c3c;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
-    left: 1150px;  /* Final position at the end of the path */
-    top: 350px;
+    left: 1000px;  /* Final position at the end of the path */
+    top: 250px;
     transform: translate(-50%, -50%);
     opacity: 1; /* Always visible at the end of the path */
     transform-origin: center;
@@ -204,8 +204,16 @@ body {
 }
 
 #airplane {
-    offset-path: path("M150,350 Q400,100 650,350 T1150,350");
+    offset-path: path("M150,350 Q400,100 650,350 T1000,250");
 }
+
+
+@media (max-width: 1000px) {
+    .airplane-path, #airplane, #map-marker {
+        display: none;
+    }
+}
+
 .tag_title {
     font-size: 1.7rem;
     font-weight: 500;
@@ -231,6 +239,11 @@ body {
     color: white;
     border-radius: 4px;
     margin-right: 50px;
+    
+}
+
+.about_btn a{
+    color: white;
     font-size: medium;
 }
 
@@ -299,7 +312,7 @@ body {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 30px;
-    color:rgb(225, 121, 16)
+    color:#2980b9;
 }
 
 .carousel-track {
@@ -445,20 +458,20 @@ body {
 }
 
 .community-section h1 {
-    margin-top: 100px;
-    color : rgb(225, 121, 16);
+    margin-top: 60px;
+    color : white;
     font-family:cursive;
     font-size: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
-h2{
+.community-section h2{
     color:rgba(255, 255, 255, 0.838);
     margin-bottom: 20px;
 }
 
 #write-blog-btn {
-    background-color: rgb(225, 121, 16);
+    background-color:#2980b9;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -646,7 +659,7 @@ select[multiple] {
 
 .carousel-dest h1{
     text-align: center;
-    color: rgb(225, 121, 16);
+    color: #2980b9;
     margin-bottom: 20px;
 }
 .destination-display {
@@ -926,7 +939,6 @@ input:focus {
 /* footer */
 .footer {
     background-color: #FFFFFF;
-    color: #333333;
     padding: 40px 0 0 0;
     width: 100%;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
@@ -978,11 +990,15 @@ input:focus {
     color: rgb(225, 121, 16);
 }
 .footer-bottom {
-    background-color: rgba(225, 120, 16, 0.795);
-    color: #FFFFFF;
+    background-color:rgb(128, 128, 128);
     text-align: center;
     padding: 10px 0;
     margin-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 16px;
+    color:white;
 }
 .footer-logo {
     width: 200px;
@@ -1008,9 +1024,11 @@ input:focus {
 }
 .footer-top-border {
     height: 3px;
-    background-color: rgba(225, 120, 16, 0.489);
+    background-color: rgba(128, 128, 128, 0.767);
     width: 100%;
 }
+
+
 
 @media (max-width: 768px) {
     .container {

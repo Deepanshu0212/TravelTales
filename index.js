@@ -292,9 +292,19 @@ document.getElementById('guideLink').addEventListener('click', function(event) {
     }
 });
 
-
-
-
+document.getElementById('aboutLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default action of navigating to blog.html
+    
+    // Check if the current user is logged in
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (currentUser) {
+        window.location.href = './about.html';
+    } else {
+        container.classList.add('active'); 
+        document.body.style.overflow = 'hidden';
+    }
+});
 
 
 
@@ -313,11 +323,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     writeBlogBtn.addEventListener('click', function() {
-        // Check if a user is signed in
         if (currentUser) {
+
+            console.log(currentUser);
             blogPopup.style.display = 'block';
             document.body.style.overflow = 'hidden';
         } else {
+            console.log("Hello");
             container.classList.add('active'); 
             document.body.style.overflow = 'hidden';
         }

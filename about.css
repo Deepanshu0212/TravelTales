@@ -1,18 +1,19 @@
-
-*{
+* {
     text-decoration: none;
     list-style: none;
-    margin: 0px;
-    padding:0px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
-body{
-    background-color: #f4f4f4;
-    line-height: 1.6;
-    color: #333;
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #e0f2fe, #dcfce7);
 }
+
+
 nav{
     display: flex;
     width:100%;
@@ -119,199 +120,103 @@ nav{
 #check{
     display: none;
 }
-
-
-
-.maincontent{
-    width:80%;
-    margin:100px auto;
+.container {
     
-}
-.headimg{
-
-    
-    background-image: url(images/image\ copy.png);
-    background-size:contain;
-    background-position:center;
-    
-    text-align: center;
-    padding: 1em;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    height:150px;
-    width:100%;
-}
-
-.headimg h1{
-    margin-top: 20px;
-    color: #042338;
-}
-h1, h2, h3 {
-    margin: 0;
-}
-h1 {
-    font-size: 2.5em;
-}
-.search-section {
-    background-color: #fff;
-    padding: 20px;
+    max-width: 1200px;
+    margin: 100px auto;
+    background: white;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-.search-options {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-#searchInput {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-.search-option {
-    width: 25%;
-    padding: 10px;
-    background-color: #3498db;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-.search-option:hover {
-    background-color: #2980b9;
-}
-.search-content {
-    display: none;
-    margin-top: 20px;
-}
-.search-content.active {
-    display: block;
-}
-.continent-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-}
-.continent-item {
-    position: relative;
-    cursor: pointer;
     overflow: hidden;
+}
+.hero {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #3b82f6;
+    color: white;
+}
+.hero-content {
+    text-align: center;
+}
+.hero-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+.hero h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+}
+.main-content {
+    flex: 2;
+    min-width: 300px;
+}
+.contact-section {
+    flex: 1;
+    min-width: 250px;
+    background: #f0f9ff;
+    padding: 1.5rem;
     border-radius: 8px;
-    transition: transform 0.3s ease;
 }
-.continent-item:hover {
-    transform: scale(1.05);
-}
-.continent-item img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-}
-.continent-item span {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 5px;
-    text-align: center;
-}
-.countries-list, .tags-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.country-tag, .tag {
-    background-color: #3498db;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.country-tag:hover, .country-tag.active,
-.tag:hover, .tag.active {
-    background-color: #2980b9;
-}
-.selected-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-}
-.selected-tag {
-    background-color: #2ecc71;
-    color: #fff;
-    padding: 5px 25px 5px 10px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    position: relative;
-}
-.selected-tag::after {
-    content: '×';
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2em;
-    cursor: pointer;
-}
-.blog-grid {
+.grid {
+    margin-top: 1.5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
-.blog-item {
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.grid-item {
+    display: flex;
+    align-items: flex-start;
 }
-.blog-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+    color: #3b82f6;
 }
-.blog-item img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+.join-section {
+    background: #f3f4f6;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
 }
-.blog-content {
-    padding: 20px;
+h2 {
+    color: #1e40af;
+    margin-bottom: 1rem;
 }
-.blog-content h3 {
-    margin-bottom: 10px;
-    color: #2c3e50;
-    font-size: 1.3em;
-}
-.blog-content p {
-    font-size: 0.95em;
-    color: #555;
+p {
+    color: #4b5563;
     line-height: 1.6;
 }
-.blog-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 15px;
+form input, form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
 }
-.blog-tag {
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.8em;
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
+form button:hover {
+    background: #2563eb;
+}
+
 
 .footer {
     background-color: #FFFFFF;
@@ -403,12 +308,16 @@ h1 {
     background-color: rgba(128, 128, 128, 0.767);
     width: 100%;
 }
-
-@media (max-width : 978px){
-    .navbtn button{
-        margin-left: 70px;
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+    .contact-section {
+        margin-top: 1.5rem;
     }
 }
+
+
 @media (max-width : 870px){
     #checkbtn{
         display: block;
