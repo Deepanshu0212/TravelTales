@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Travel Tales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./about.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <input type="checkbox" id ="check">
+            <div class ="logo">
+                <a href="../Index/index.html">
+                    <img src="../Logo.png" alt="Logoimg" id="logoimg">
+                </a>
+            </div>
+            <div class="nav-content">
+                <ul>
+                   <li><a href="../Index/index.html" >Home</a></li>
+                   <li><a href="../Blog/blog.html" id = "blogLink">Blog</a></li>
+                   <li><a href="../Guide/guide.html" id = "guideLink">Travel Guidance</a></li>
+                   <li><a href="../AboutUs/about.html" id="aboutLink">About Us</a></li>
+                   <div class="navbtn">
+                     <button id="loginButton">Login</button>
+                     <div id="userDropdown" class="dropdown-menu" style="display: none;">
+                      <button id="viewProfile"><a href="../Profile/profile.html">View Profile</a></button>
+                      <button id="logoutButton">Log Out</button>
+                     </div>
+                  </div>
+                </ul>
+               </div>
+            
+            <label id ="checkbtn" for="check"><i class="fa-solid fa-bars" ></i></label>
+         </nav>
+        </header>
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <i class="fas fa-globe-americas hero-icon"></i>
+                <h1>About Travel Tales</h1>
+            </div>
+        </div>
+        <div class="content">
+            <div class="main-content">
+                <p>Welcome to Travel Tales, where every journey becomes a story worth telling. We're passionate about exploring the world and sharing our adventures with fellow wanderers.</p>
+                
+                <div class="grid">
+                    <div class="grid-item">
+                        <i class="fas fa-bullseye icon"></i>
+                        <div>
+                            <h3>Our Mission</h3>
+                            <p>To inspire and empower travelers to create their own unforgettable tales across the globe.</p>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-users icon"></i>
+                        <div>
+                            <h3>Our Community</h3>
+                            <p>A vibrant network of adventurers, sharing tips, experiences, and support.</p>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-book-open icon"></i>
+                        <div>
+                            <h3>Our Stories</h3>
+                            <p>Authentic, captivating narratives that bring destinations to life through words and images.</p>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-map-marked-alt icon"></i>
+                        <div>
+                            <h3>Our Destinations</h3>
+                            <p>From hidden gems to iconic landmarks, we cover it all with a fresh perspective.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="join-section">
+                    <h2>Join Our Journey</h2>
+                    <p>Whether you're a seasoned globetrotter or a dreamer planning your first adventure, Travel Tales is your companion in exploration. Let's write the next chapter together!</p>
+                </div>
+            </div>
+            
+            <div class="contact-section">
+                <h2>Contact Us</h2>
+                <p><i class="fas fa-envelope icon"></i> info@traveltales.com</p>
+                <p><i class="fas fa-phone icon"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt icon"></i> 123 Adventure Lane, Wanderlust City, EX 12345, World</p>
+                
+                <form id="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <!-- <div class="footer-top-border"></div> -->
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <!-- Replace this div with your actual logo image -->
+                    <img src="../Logo.png" alt="Travel Tales Logo" style="width:150px;height:50px;">
+                </div>
+                <p>Embark on unforgettable journeys and create lasting memories with Travel Tales.</p>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="../Index/index.html">Home</a>
+                    <a href="../AboutUs/about.html">About Us</a>
+                    <a href="../Guide/guide.html">Travel Guides</a>
+                    <a href="../Blog/blog.html">Blog</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> info@traveltales.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Adventure St, Wanderlust City, 54321</p>
+            </div>
+            <div class="footer-section">
+                <h3>Featured Destinations</h3>
+                <div class="featured-destinations">
+                    <span class="featured-destination">Paris</span>
+                    <span class="featured-destination">Tokyo</span>
+                    <span class="featured-destination">New York</span>
+                    <span class="featured-destination">India</span>
+                    <span class="featured-destination">Swit</span>
+                    <span class="featured-destination">Sydney</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Travel Tales. All rights reserved. | <a href="#" style="color: inherit;">Privacy Policy</a> | <a href="#" style="color: inherit;">Terms of Service</a></p>
+        </div>
+    </footer>
+    <script src="../AboutUs/about.js"> </script>
+</body>
+</html>
